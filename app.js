@@ -129,6 +129,7 @@ function filtered(){return M.DAYS.map(function(D){return {d:D.d,wd:D.wd,items:D.
 function nActive(){return (S.q?1:0)+(S.loc?1:0)+(S.per?1:0)+(S.esp?1:0)+nPad().length+nTipo().length}
 function clearAll(){S.pad={};S.tipo={};S.loc="";S.per="";S.esp="";S.q="";$("q").value=""}
 function presentes(campo){var o={};M.ALL.forEach(function(i){o[i[campo]]=(o[i[campo]]||0)+1});return o}
+function curto(n){return n.replace(/^Pe\.\s*/,"").split(" ")[0]}
 function ordemConfig(cfgObj,presente){return keys(cfgObj).filter(function(k){return presente[k]})}
 
 /* ---------- rótulos ---------- */
@@ -204,7 +205,7 @@ function feastHTML(){
 function renderFilters(){
   var pp=presentes("p"), ll=presentes("l"), tt=presentes("t");
   $("fPad").innerHTML=ordemConfig(CFG.padres,pp).filter(function(k){return k!=="X"}).map(function(k){
-    return '<button type="button" class="chip" data-pad="'+k+'" aria-pressed="'+!!S.pad[k]+'"><span class="dot" style="background:'+pc(k)+'"></span>'+esc(CFG.padres[k].n)+'</button>';
+    return '<button type="button" class="chip" data-pad="'+k+'" aria-pressed="'+!!S.pad[k]+'"><span class="dot" style="background:'+pc(k)+'"></span>'+esc(curto(CFG.padres[k].n))+'</button>';
   }).join("");
   $("fLoc").innerHTML='<option value="">Todas as comunidades</option>'+keys(ll).sort(function(a,b){return CFG.locais[a].n.localeCompare(CFG.locais[b].n,"pt")}).map(function(k){
     return '<option value="'+k+'"'+(S.loc===k?' selected':'')+'>'+esc(CFG.locais[k].n)+' ('+ll[k]+')</option>';
