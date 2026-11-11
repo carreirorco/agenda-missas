@@ -31,7 +31,12 @@ function TODAY(){return (M&&M.y===now.getFullYear()&&M.m===now.getMonth()+1)?now
 /* ---------- cores dos padres (vêm do config.json) ---------- */
 function aplicarCores(){
   var l="",d="";
-  keys(CFG.padres).forEach(function(k){l+="--p-"+k+":"+CFG.padres[k].l+";";d+="--p-"+k+":"+CFG.padres[k].d+";"});
+  var okKey=/^[A-Za-z0-9]+$/, okCor=/^#[0-9a-fA-F]{3,8}$/;
+  keys(CFG.padres).forEach(function(k){
+    var p=CFG.padres[k];
+    if(!okKey.test(k)||!okCor.test(p.l)||!okCor.test(p.d)){console.warn("Cor de padre ignorada:",k);return}
+    l+="--p-"+k+":"+p.l+";";d+="--p-"+k+":"+p.d+";";
+  });
   var st=document.createElement("style");
   st.textContent=":root{"+l+"}:root[data-theme=\"dark\"]{"+d+"}";
   document.head.appendChild(st);
@@ -46,12 +51,16 @@ function getJSON(url){
 }
 function construir(key,json){
   var p=key.split("-"), y=+p[0], mo=+p[1], dim=new Date(y,mo,0).getDate(), first=new Date(y,mo-1,1).getDay();
-  var DAYS=[], ALL=[], SPECIAL={};
+  var DAYS=[], ALL=[], SPECIAL={}, ignoradas=0;
   (json.destaques||[]).forEach(function(f){SPECIAL[f[0]]=f[1]});
   for(var d=1;d<=dim;d++){
     var wd=new Date(y,mo-1,d).getDay();
-    var items=(json.dias&&json.dias[d]||[]).map(function(r){
-      var m=/(\d+)h(\d+)?/.exec(r[0]), min=m?(+m[1])*60+(+(m[2]||0)):0, o=r[4]||"";
+    var items=(json.dias&&json.dias[d]||[]).filter(function(r){
+      var ok=Array.isArray(r)&&/^\d{1,2}h(\d{2})?$/.test(r[0])&&CFG.locais[r[1]]&&CFG.tipos[r[2]]&&CFG.padres[r[3]]&&/^[A-Za-z0-9]+$/.test(r[3]);
+      if(!ok){ignoradas++;console.warn("Celebração ignorada (dado inválido):",key,d,r)}
+      return ok;
+    }).map(function(r){
+      var m=/(\d+)h(\d+)?/.exec(r[0]), min=(+m[1])*60+(+(m[2]||0)), o=r[4]||"";
       return {d:d,wd:wd,h:r[0],min:min,l:r[1],t:r[2],p:r[3],o:o,
         sol:/solenidade|tríduo/i.test(o), vot:/votiva/i.test(o), mar:o===MARIANO,
         when:new Date(y,mo-1,d,Math.floor(min/60),min%60)};
@@ -59,7 +68,7 @@ function construir(key,json){
     DAYS.push({d:d,wd:wd,items:items});
     ALL=ALL.concat(items);
   }
-  return {key:key,y:y,m:mo,dim:dim,first:first,DAYS:DAYS,ALL:ALL,SPECIAL:SPECIAL,FEASTS:json.destaques||[]};
+  return {key:key,y:y,m:mo,dim:dim,first:first,DAYS:DAYS,ALL:ALL,SPECIAL:SPECIAL,FEASTS:(json.destaques||[]).filter(function(f){return f[0]>=1&&f[0]<=dim}),ignoradas:ignoradas};
 }
 function carregar(key){
   if(cache[key]) return Promise.resolve(cache[key]);
@@ -81,6 +90,7 @@ function abrir(pedido,resetar){
     if(S.sel>M.dim) S.sel=1;
     var h="#"+key;
     if(location.hash!==h) history.replaceState(null,"",h);
+    if(m.ignoradas) aviso+=(aviso?" ":"")+m.ignoradas+(m.ignoradas===1?" celebração foi ignorada":" celebrações foram ignoradas")+" por erro nos dados deste mês.";
     $("aviso").hidden=!aviso; $("aviso").textContent=aviso;
     render();
     if(mudou) window.scrollTo(0,0);
@@ -156,6 +166,7 @@ function dayText(D){
   });
   return t+PARISH;
 }
+function shareBtn(d){return navigator.share?'<button type="button" class="copy" data-share="'+d+'">Compartilhar</button>':""}
 function dayBlock(D){
   var T=TODAY(), isToday=D.d===T, past=T&&D.d<T, nextIdx=-1;
   if(isToday){for(var i=0;i<D.items.length;i++){if(D.items[i].when>=now){nextIdx=i;break}}}
@@ -163,11 +174,12 @@ function dayBlock(D){
     return itemHTML(it,isToday?(it.when<now?"past":(i===nextIdx?"next-it":"")):"");
   }).join("");
   var sp=M.SPECIAL[D.d]?'<span class="sp">'+esc(M.SPECIAL[D.d])+'</span>':'';
-  return '<section class="day'+(isToday?" today":"")+(D.wd===0?" sun":"")+(past?" pastday":"")+'" id="dia-'+D.d+'"><div class="dcard"><div class="dhead"><div class="t"><div class="rel">'+relDay(D.d)+'</div><div class="dt">'+dateLine(D.d)+'</div>'+sp+'</div><button type="button" class="copy" data-copy="'+D.d+'">Copiar</button></div>'+body+'</div></section>';
+  return '<section class="day'+(isToday?" today":"")+(D.wd===0?" sun":"")+(past?" pastday":"")+'" id="dia-'+D.d+'"><div class="dcard"><div class="dhead"><div class="t"><div class="rel">'+relDay(D.d)+'</div><div class="dt">'+dateLine(D.d)+'</div>'+sp+'</div><div class="actions">'+shareBtn(D.d)+'<button type="button" class="copy" data-copy="'+D.d+'">Copiar</button></div></div>'+body+'</div></section>';
 }
 
 /* ---------- próxima celebração ---------- */
 function nextHTML(){
+  if(M.key<hojeKey()) return "";
   var T=TODAY(), ref=T?new Date():new Date(M.y,M.m-1,1,0,0);
   var nx=M.ALL.filter(function(i){return i.when>=ref&&match(i)})[0];
   var mes=MESES[M.m-1];
@@ -239,13 +251,13 @@ function viewCal(){
   F.forEach(function(D){
     var cls="cell"+(D.items.length?"":" dim")+(D.d===T?" today":"")+(D.d===S.sel?" sel":"");
     var dots=D.items.slice(0,12).map(function(i){return '<span class="dot" style="background:'+pc(i.p)+'"></span>'}).join("");
-    html+='<button type="button" class="'+cls+'" data-sel="'+D.d+'" aria-label="Dia '+D.d+', '+D.items.length+' celebrações"><span class="cellrow"><span class="num tnum">'+D.d+'</span>'+(M.SPECIAL[D.d]?'<span class="star">★</span>':'')+'</span><span class="dots">'+dots+'</span></button>';
+    html+='<button type="button" class="'+cls+'" data-sel="'+D.d+'" aria-label="Dia '+D.d+' de '+MESES[M.m-1]+', '+D.items.length+(D.items.length===1?' celebração':' celebrações')+'"><span class="cellrow"><span class="num tnum">'+D.d+'</span>'+(M.SPECIAL[D.d]?'<span class="star">★</span>':'')+'</span><span class="dots">'+dots+'</span></button>';
   });
   var pp=presentes("p");
   html+='</div><div class="legend">'+ordemConfig(CFG.padres,pp).map(function(k){return '<span><i class="dot" style="background:'+pc(k)+'"></i>'+esc(CFG.padres[k].n)+'</span>'}).join("")+'<span><b style="color:var(--gold-text)">★</b> Data especial</span></div>';
   var D=F[S.sel-1];
   html+='<section class="detail"><h3>'+cap(dateLine(D.d))+'</h3>';
-  html+=D.items.length?'<div class="dcard"><div class="dhead"><div class="t">'+(M.SPECIAL[D.d]?'<span class="sp" style="margin:0">'+esc(M.SPECIAL[D.d])+'</span>':'<span class="dt">'+D.items.length+(D.items.length===1?" celebração":" celebrações")+'</span>')+'</div><button type="button" class="copy" data-copy="'+D.d+'">Copiar</button></div>'+D.items.map(function(i){return itemHTML(i,"")}).join("")+'</div>'
+  html+=D.items.length?'<div class="dcard"><div class="dhead"><div class="t">'+(M.SPECIAL[D.d]?'<span class="sp" style="margin:0">'+esc(M.SPECIAL[D.d])+'</span>':'<span class="dt">'+D.items.length+(D.items.length===1?" celebração":" celebrações")+'</span>')+'</div><div class="actions">'+shareBtn(D.d)+'<button type="button" class="copy" data-copy="'+D.d+'">Copiar</button></div></div>'+D.items.map(function(i){return itemHTML(i,"")}).join("")+'</div>'
     :'<div class="empty">'+(nActive()?"Nenhuma celebração neste dia com os filtros atuais.":"Sem celebrações neste dia.")+'</div>';
   return html+'</section>';
 }
@@ -306,6 +318,7 @@ function render(){
   $("note").textContent="Transcrito do quadro de avisos da paróquia (Agenda de Missas e Sacramentos, "+nomeMes(M)+"). Confirme os horários com a secretaria paroquial, pois podem mudar.";
   document.title="Agenda de Missas · "+cap(MESES[M.m-1])+" "+M.y+" · "+PARISH;
   Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(t){t.setAttribute("aria-selected",t.dataset.v===S.v)});
+  $("view").setAttribute("aria-labelledby","tab-"+S.v);
   var full=S.v==="loc"||S.v==="pad";
   $("wrap").className="wrap"+(full?" wide":"");
   $("fbar").hidden=full;
@@ -339,8 +352,9 @@ document.addEventListener("click",function(e){
   if(ds.tipo){S.tipo[ds.tipo]=!S.tipo[ds.tipo];render();return}
   if(ds.per!==undefined){S.per=ds.per;render();return}
   if(ds.esp!==undefined){S.esp=ds.esp;render();return}
-  if(ds.sel){S.sel=+ds.sel;render();return}
+  if(ds.sel){S.sel=+ds.sel;render();var dt=document.querySelector(".detail");if(dt) dt.scrollIntoView({behavior:"smooth",block:"nearest"});return}
   if(ds.past!==undefined){S.past=ds.past==="1";render();return}
+  if(ds.share){navigator.share({text:dayText(M.DAYS[+ds.share-1])}).catch(function(){});return}
   if(ds.copy){copyText(dayText(M.DAYS[+ds.copy-1]));return}
   if(ds.loc){clearAll();S.loc=ds.loc;S.v="agenda";S.open=true;render();window.scrollTo({top:0,behavior:"smooth"});return}
   if(ds.padgo){clearAll();S.pad[ds.padgo]=true;S.v="agenda";render();window.scrollTo({top:0,behavior:"smooth"});return}
@@ -371,7 +385,7 @@ setInterval(function(){
   if(n.getDate()!==lastDay){
     lastDay=n.getDate(); now=n;
     if(auto){abrir(hojeKey(),true);return}
-    S.sel=S.sel; render();return;
+    render();return;
   }
   if(S.v==="agenda"){var y=window.scrollY;render();window.scrollTo(0,y)}
 },30000);

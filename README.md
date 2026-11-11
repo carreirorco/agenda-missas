@@ -23,10 +23,14 @@ Abra `http://localhost:8000`. (Abrir o `index.html` direto do disco não funcion
 2. Inclua o mês em `data/meses.json` (ex.: `["2026-10","2026-11","2026-12"]`).
 3. Se surgir comunidade, padre ou tipo novo, cadastre em `data/config.json`. Padre novo leva cor clara (`l`) e escura (`d`); não precisa mexer no CSS.
 
+Antes de publicar, rode `python3 scripts/validar.py`: ele confere horários, comunidades, padres e tipos contra o `config.json` (o GitHub também roda essa checagem a cada push em `data/`).
+
 A página abre sozinha no mês de hoje. Se esse mês ainda não existir, abre o mais recente e avisa que a agenda ainda não foi publicada. O mês também vai na URL (`#2026-11`).
 
 ## Arquivos
 
 - `index.html`, `style.css`, `app.js`: a página.
+- `scripts/validar.py` e `.github/workflows/`: validação dos dados.
+- `fonts/`: Cormorant Garamond (licença OFL), hospedada aqui para não depender do Google.
 - `data/`: configuração e meses.
 - `referencia/`: páginas antigas e a foto do quadro (apoio para a transcrição; não são usadas pelo site).

@@ -1,3 +1,6 @@
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:600 700;font-display:swap;
+  src:url(fonts/cormorant-garamond-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212}
 /*
  * Identidade visual herdada do Sistema de Consagração (azul-marinho + dourado,
  * títulos em Cormorant Garamond, corpo na fonte do sistema, medalhão e cruz-divisória).
@@ -66,7 +69,7 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.15}
 .iconbtn:hover:not(:disabled){border-color:var(--brand)}
 
 /* filtros */
-.fbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding-block:8px;display:flex;gap:8px;align-items:center}
+.fbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding-block:8px;padding-right:56px;display:flex;gap:8px;align-items:center}
 .fbar[hidden]{display:none}
 .fbar .scroll{flex:1;min-width:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:2px}
 .fbar .scroll::-webkit-scrollbar{display:none}
@@ -120,6 +123,7 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.15}
 .day.today .dhead .dt,.day.today .dhead .sp{color:inherit;opacity:.92}
 .day.today .dhead .rel{font-size:32px;color:inherit}
 .day.today .copy{border-color:color-mix(in srgb,var(--on-brand) 55%,transparent);color:inherit}
+.actions{display:flex;gap:6px;flex:none}
 .copy{flex:none;background:none;border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:13px;font-weight:600;color:var(--muted);min-height:44px}
 .item{display:grid;grid-template-columns:58px minmax(0,1fr);gap:12px;padding:12px 14px;border-top:1px solid var(--line);align-items:start}
 .dhead + .item{border-top:0}
@@ -128,7 +132,7 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.15}
 .item .sub{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:3px;font-size:15px;color:var(--muted)}
 .item .sub b{color:var(--fg);font-weight:600}
 .item .obs{display:block;font-size:14px;color:var(--muted);margin-top:2px}
-.item.past{opacity:.55}
+.item.past{opacity:.72}
 .item.next-it{background:color-mix(in srgb,var(--brand) 9%,var(--surface))}
 .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;margin-right:6px;letter-spacing:.03em;vertical-align:middle;text-transform:uppercase}
 .tag.sol{background:var(--gold-bg);color:var(--gold-text)}

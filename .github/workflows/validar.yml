@@ -1,0 +1,12 @@
+name: Validar dados
+on:
+  push:
+    paths: ["data/**", "scripts/**"]
+  pull_request:
+    paths: ["data/**", "scripts/**"]
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/validar.py

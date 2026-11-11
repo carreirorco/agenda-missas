@@ -5,15 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Agenda de Missas · Paróquia São Judas Tadeu</title>
 <meta name="description" content="Agenda mensal de missas e sacramentos da Paróquia São Judas Tadeu.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Agenda de Missas · Paróquia São Judas Tadeu">
+<meta property="og:description" content="Horários de missas e sacramentos do mês: hoje, próxima celebração, calendário, comunidades e padres.">
 <meta name="theme-color" content="#1e3a6e">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%231e3a6e' stroke='%23b8862b' stroke-width='4'/%3E%3Cpath d='M32 14v36M21 25h22' stroke='%23fff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
-<script>
-/* aplica o tema antes de pintar (claro é o padrão) */
-try{document.documentElement.setAttribute("data-theme",localStorage.getItem("missas-tema")==="dark"?"dark":"light")}catch(e){}
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+<script src="theme.js"></script>
+<link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -51,17 +52,17 @@ try{document.documentElement.setAttribute("data-theme",localStorage.getItem("mis
     <button class="linkbtn" id="clear" type="button">Limpar filtros</button>
   </div>
 
-  <main id="view"></main>
+  <main id="view" role="tabpanel" aria-live="off"></main>
 
   <p class="note" id="note"></p>
 </div>
 
 <nav class="nav" aria-label="Seções">
   <div class="in" role="tablist" id="tabs">
-    <button class="tab" role="tab" data-v="agenda"><svg viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>Agenda</button>
-    <button class="tab" role="tab" data-v="cal"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Calendário</button>
-    <button class="tab" role="tab" data-v="loc"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Comunidades</button>
-    <button class="tab" role="tab" data-v="pad"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-4 3.6-6 7-6s6.2 2 7 6"/></svg>Padres</button>
+    <button class="tab" role="tab" id="tab-agenda" aria-controls="view" data-v="agenda"><svg viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>Agenda</button>
+    <button class="tab" role="tab" id="tab-cal" aria-controls="view" data-v="cal"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Calendário</button>
+    <button class="tab" role="tab" id="tab-loc" aria-controls="view" data-v="loc"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Comunidades</button>
+    <button class="tab" role="tab" id="tab-pad" aria-controls="view" data-v="pad"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-4 3.6-6 7-6s6.2 2 7 6"/></svg>Padres</button>
   </div>
 </nav>
 <div class="toast" id="toast" role="status"></div>
