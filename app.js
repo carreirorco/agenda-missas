@@ -68,6 +68,7 @@ function construir(key,json){
     DAYS.push({d:d,wd:wd,items:items});
     ALL=ALL.concat(items);
   }
+  ALL.forEach(function(it,i){it.id=i});
   return {key:key,y:y,m:mo,dim:dim,first:first,DAYS:DAYS,ALL:ALL,SPECIAL:SPECIAL,FEASTS:(json.destaques||[]).filter(function(f){return f[0]>=1&&f[0]<=dim}),ignoradas:ignoradas};
 }
 function carregar(key){
@@ -157,8 +158,9 @@ function itemHTML(it,cls){
   if(it.t!=="m") tags+='<span class="tag sac">'+esc(CFG.tipos[it.t])+'</span>';
   if(L.ext) tags+='<span class="tag out">Fora da paróquia</span>';
   var obs=it.o?(it.t==="c"?"Noivos: "+esc(it.o):esc(it.o)):"";
+  var add=(cls&&cls.indexOf("past")>=0)?"":'<button type="button" class="addbtn" data-add="'+it.id+'" title="Adicionar à agenda" aria-label="Adicionar à agenda: '+esc(CFG.tipos[it.t])+' às '+esc(it.h)+' em '+esc(L.n)+'"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg></button>';
   return '<div class="item'+(cls?" "+cls:"")+'"><span class="h">'+esc(it.h)+'</span><div><div class="loc">'+tags+esc(L.n)+'</div>'+
-    '<div class="sub"><span class="dot" style="background:'+pc(it.p)+'"></span><b>'+esc(CFG.padres[it.p].n)+'</b></div>'+(obs?'<span class="obs">'+obs+'</span>':'')+'</div></div>';
+    '<div class="sub"><span class="dot" style="background:'+pc(it.p)+'"></span><b>'+esc(CFG.padres[it.p].n)+'</b></div>'+(obs?'<span class="obs">'+obs+'</span>':'')+'</div>'+add+'</div>';
 }
 function dayText(D){
   var t=cap(WD[D.wd])+", "+pad2(D.d)+"/"+pad2(M.m)+"/"+M.y+"\n";
@@ -309,6 +311,55 @@ function viewPad(){
   return html+'</div>';
 }
 
+/* ---------- adicionar à agenda ---------- */
+function localTexto(L){return [L.n,L.end,L.cidade].filter(Boolean).join(", ")}
+function mapsURL(L){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(L.geo||localTexto(L))}
+function evento(it){
+  var L=CFG.locais[it.l], dur=it.t==="m"?60:90;
+  /* horário de Brasília (UTC-3, sem horário de verão) */
+  var ini=Date.UTC(M.y,M.m-1,it.d,Math.floor(it.min/60)+3,it.min%60), fim=ini+dur*60000;
+  var desc=[CFG.padres[it.p].n==="A confirmar"?"Padre a confirmar":"Celebrante: "+CFG.padres[it.p].n];
+  if(it.o) desc.push((it.t==="c"?"Noivos: ":"")+it.o);
+  desc.push(PARISH+" · Confirme os horários com a secretaria paroquial.");
+  return {titulo:CFG.tipos[it.t]+" – "+L.n,ini:ini,fim:fim,local:localTexto(L),desc:desc.join("\n"),uid:M.key+"-"+it.d+"-"+it.min+"-"+it.l+"-"+it.p+"@agenda-missas"};
+}
+function utc(ms){return new Date(ms).toISOString().replace(/[-:]|\.\d{3}/g,"")}
+function googleURL(e){
+  return "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(e.titulo)+
+    "&dates="+utc(e.ini)+"/"+utc(e.fim)+"&location="+encodeURIComponent(e.local)+"&details="+encodeURIComponent(e.desc);
+}
+function icsEsc(t){return String(t).replace(/\\/g,"\\\\").replace(/;/g,"\;").replace(/,/g,"\\,").replace(/\r?\n/g,"\\n")}
+function icsFold(l){var o=[];while(l.length>73){o.push(l.slice(0,73));l=" "+l.slice(73)}o.push(l);return o.join("\r\n")}
+function icsText(e){
+  var L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Agenda de Missas//PT-BR//","CALSCALE:GREGORIAN","BEGIN:VEVENT",
+    "UID:"+e.uid,"DTSTAMP:"+utc(Date.now()),"DTSTART:"+utc(e.ini),"DTEND:"+utc(e.fim),
+    "SUMMARY:"+icsEsc(e.titulo),"LOCATION:"+icsEsc(e.local),"DESCRIPTION:"+icsEsc(e.desc),
+    "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+icsEsc(e.titulo),"TRIGGER:-PT1H","END:VALARM","END:VEVENT","END:VCALENDAR"];
+  return L.map(icsFold).join("\r\n")+"\r\n";
+}
+var sheetFoco=null, sheetEv=null;
+function abrirSheet(it,btn){
+  var L=CFG.locais[it.l]; sheetEv=evento(it); sheetFoco=btn;
+  $("sheetTitle").textContent=sheetEv.titulo;
+  $("sheetWhen").textContent=cap(dateLine(it.d))+" · "+it.h;
+  $("sheetWhere").textContent=sheetEv.local;
+  $("sheetGoogle").href=googleURL(sheetEv);
+  $("sheetMap").href=mapsURL(L);
+  $("sheet").hidden=false; $("sheetGoogle").focus();
+}
+function fecharSheet(){
+  $("sheet").hidden=true; sheetEv=null;
+  if(sheetFoco&&document.body.contains(sheetFoco)) sheetFoco.focus();
+}
+function baixarIcs(){
+  if(!sheetEv) return;
+  var blob=new Blob([icsText(sheetEv)],{type:"text/calendar;charset=utf-8"}), a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download="missa-"+M.key+"-"+pad2(new Date(sheetEv.ini-10800000).getUTCDate())+".ics";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
+  toast("Arquivo de agenda baixado");
+}
+
 /* ---------- render ---------- */
 function render(){
   if(!M) return;
@@ -355,12 +406,25 @@ document.addEventListener("click",function(e){
   if(ds.esp!==undefined){S.esp=ds.esp;render();return}
   if(ds.sel){S.sel=+ds.sel;render();var dt=document.querySelector(".detail");if(dt) dt.scrollIntoView({behavior:"smooth",block:"nearest"});return}
   if(ds.past!==undefined){S.past=ds.past==="1";render();return}
+  if(ds.add){abrirSheet(M.ALL[+ds.add],b);return}
+  if(b.id==="sheetIcs"){baixarIcs();return}
+  if(b.dataset.close!==undefined){fecharSheet();return}
   if(ds.share){navigator.share({text:dayText(M.DAYS[+ds.share-1])}).catch(function(){});return}
   if(ds.copy){copyText(dayText(M.DAYS[+ds.copy-1]));return}
   if(ds.loc){clearAll();S.loc=ds.loc;S.v="agenda";S.open=true;render();window.scrollTo({top:0,behavior:"smooth"});return}
   if(ds.padgo){clearAll();S.pad[ds.padgo]=true;S.v="agenda";render();window.scrollTo({top:0,behavior:"smooth"});return}
   if(b.id==="clear"||ds.clear){clearAll();render();return}
   if(b.id==="ftoggle"){S.open=!S.open;b.setAttribute("aria-expanded",S.open);$("panel").classList.toggle("open",S.open)}
+});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"&&!$("sheet").hidden) fecharSheet();
+  if(e.key==="Tab"&&!$("sheet").hidden){
+    var f=[].slice.call($("sheet").querySelectorAll("a[href],button")).filter(function(x){return x.offsetParent!==null});
+    if(!f.length) return;
+    var first=f[0], last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+  }
 });
 $("theme").addEventListener("click",function(){
   var nx=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";

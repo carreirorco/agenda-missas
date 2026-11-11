@@ -126,7 +126,7 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.15}
 .day.today .copy{border-color:color-mix(in srgb,var(--on-brand) 55%,transparent);color:inherit}
 .actions{display:flex;gap:6px;flex:none}
 .copy{flex:none;background:none;border:1px solid var(--line);border-radius:10px;padding:5px 11px;font-size:12px;font-weight:600;color:var(--muted);min-height:36px}
-.item{display:grid;grid-template-columns:50px minmax(0,1fr);gap:10px;padding:10px 12px;border-top:1px solid var(--line);align-items:start}
+.item{display:grid;grid-template-columns:50px minmax(0,1fr) auto;gap:10px;padding:10px 12px;border-top:1px solid var(--line);align-items:start}
 .dhead + .item{border-top:0}
 .item .h{font-family:var(--font-display);font-weight:700;font-size:20px;line-height:1;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1,"tnum" 1}
 .item .loc{font-weight:600;font-size:15px;line-height:1.25}
@@ -203,3 +203,19 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.15}
   .cell .dots .dot{width:7px;height:7px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* adicionar à agenda */
+.addbtn{align-self:start;width:32px;height:32px;padding:0;border:0;border-radius:50%;background:none;color:var(--muted);display:grid;place-items:center;opacity:.75}
+.addbtn:hover,.addbtn:focus-visible{opacity:1;background:var(--surface2);color:var(--brand)}
+.addbtn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sheet{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center}
+.sheet[hidden]{display:none}
+.sheet .backdrop{position:absolute;inset:0;background:rgb(10 18 34 / .5)}
+.sheet .box{position:relative;width:100%;max-width:480px;background:var(--surface);border:1px solid var(--line);border-radius:18px 18px 0 0;
+  padding:18px 16px calc(14px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow)}
+.sheet h2{margin:0;font-size:22px}
+.sheet .when{margin:0;font-weight:600}
+.sheet .where{margin:0 0 6px;color:var(--muted);font-size:13px}
+.opt{display:block;width:100%;text-align:center;text-decoration:none;color:var(--fg);background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-weight:600;font-size:14px}
+.opt:hover{border-color:var(--brand)}
+@media (min-width:700px){.sheet{align-items:center}.sheet .box{border-radius:18px}}

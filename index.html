@@ -68,6 +68,18 @@
     <button class="tab" role="tab" id="tab-pad" aria-controls="view" data-v="pad"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-4 3.6-6 7-6s6.2 2 7 6"/></svg>Padres</button>
   </div>
 </nav>
+<div class="sheet" id="sheet" hidden>
+  <div class="backdrop" data-close></div>
+  <div class="box" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <h2 id="sheetTitle"></h2>
+    <p class="when" id="sheetWhen"></p>
+    <p class="where" id="sheetWhere"></p>
+    <a class="opt" id="sheetGoogle" target="_blank" rel="noopener noreferrer">Google Agenda</a>
+    <button class="opt" id="sheetIcs" type="button">Outras agendas (arquivo .ics)</button>
+    <a class="opt" id="sheetMap" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+    <button class="linkbtn" type="button" data-close>Fechar</button>
+  </div>
+</div>
 <div class="toast" id="toast" role="status"></div>
 <script src="app.js"></script>
 </body>

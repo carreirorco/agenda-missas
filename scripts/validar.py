@@ -10,6 +10,11 @@ erros = []
 
 def err(msg): erros.append(msg)
 
+for k, l in cfg["locais"].items():
+    if "geo" in l and not re.fullmatch(r"-?\d{1,2}\.\d+,-?\d{1,3}\.\d+", l["geo"]): err(f"config: 'geo' de {k} deve ser 'lat,lon' (ex.: -22.34,-48.79)")
+    for c in ("end", "cidade"):
+        if c in l and not str(l[c]).strip(): err(f"config: '{c}' de {k} está vazio")
+
 for k, p in cfg["padres"].items():
     if not re.fullmatch(r"[A-Za-z0-9]+", k): err(f"config: código de padre inválido: {k}")
     for c in ("l", "d"):

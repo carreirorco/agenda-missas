@@ -27,6 +27,12 @@ Antes de publicar, rode `python3 scripts/validar.py`: ele confere horários, com
 
 A página abre sozinha no mês de hoje. Se esse mês ainda não existir, abre o mais recente e avisa que a agenda ainda não foi publicada. O mês também vai na URL (`#2026-11`).
 
+## Localização das comunidades e "Adicionar à agenda"
+
+Cada comunidade em `data/config.json` pode ter, além de `n` (nome): `cidade` (ex.: `"Pederneiras/SP"`), `end` (rua e número) e `geo` (`"lat,lon"` do ponto exato; no Google Maps, clique com o botão direito no local e copie as coordenadas). Tudo é opcional: sem `geo`, o mapa e a agenda usam o nome, o endereço e a cidade.
+
+Em cada missa há um botão discreto com ícone de calendário. Ele abre um quadro com **Google Agenda**, **arquivo .ics** (Samsung, Apple, Outlook) e **Ver no mapa**. O evento leva celebrante, observações e o endereço da comunidade; missa dura 1h e os demais sacramentos 1h30; o `.ics` inclui lembrete 1 hora antes.
+
 ## Arquivos
 
 - `index.html`, `style.css`, `app.js`: a página.

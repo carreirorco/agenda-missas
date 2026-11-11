@@ -1,34 +1,49 @@
 {
  "locais": {
   "sj": {
-   "n": "São Judas"
+   "n": "São Judas",
+   "cidade": "Pederneiras/SP",
+   "end": "Rua Josué de Almeida Franco",
+   "geo": "-22.34264,-48.79229"
   },
   "st": {
-   "n": "Santa Terezinha"
+   "n": "Santa Terezinha",
+   "cidade": "Pederneiras/SP"
   },
   "rec": {
-   "n": "Recanto dos Idosos"
+   "n": "Recanto dos Idosos",
+   "cidade": "Pederneiras/SP"
   },
   "pat": {
-   "n": "Paturis"
+   "n": "Paturis",
+   "cidade": "Pederneiras/SP"
   },
   "nsps": {
-   "n": "N. Sª do Perpétuo Socorro"
+   "n": "N. Sª do Perpétuo Socorro",
+   "cidade": "Pederneiras/SP",
+   "geo": "-22.32099,-48.80178"
   },
   "nsg": {
-   "n": "N. Sª das Graças"
+   "n": "N. Sª das Graças",
+   "cidade": "Pederneiras/SP",
+   "end": "Rua Cândido Campanhã",
+   "geo": "-22.33359,-48.80321"
   },
   "gua": {
-   "n": "Guaianãs"
+   "n": "Guaianãs",
+   "cidade": "Pederneiras/SP"
   },
   "bes": {
-   "n": "Bessi"
+   "n": "Bessi",
+   "cidade": "Pederneiras/SP"
   },
   "sal": {
-   "n": "Saltinho"
+   "n": "Saltinho",
+   "cidade": "Pederneiras/SP"
   },
   "cjt": {
-   "n": "Capela Jesus Trabalhador"
+   "n": "Capela Jesus Trabalhador",
+   "cidade": "Pederneiras/SP"
   },
   "mre": {
    "n": "Paróquia Mãe do Redentor",
@@ -40,19 +55,23 @@
   },
   "fna": {
    "n": "Famílias Novas – Agudos",
-   "ext": 1
+   "ext": 1,
+   "cidade": "Agudos/SP"
   },
   "crm": {
    "n": "Cristo Rei – Macatuba",
-   "ext": 1
+   "ext": 1,
+   "cidade": "Macatuba/SP"
   },
   "psa": {
    "n": "Paróquia Santo Antônio – Agudos",
-   "ext": 1
+   "ext": 1,
+   "cidade": "Agudos/SP"
   },
   "cjb": {
    "n": "Capela São João Batista – Pederneiras",
-   "ext": 1
+   "ext": 1,
+   "cidade": "Pederneiras/SP"
   },
   "psc": {
    "n": "Paróquia Santa Clara de Assis",
@@ -60,19 +79,23 @@
   },
   "pjb": {
    "n": "Paróquia São João Batista – Bauru",
-   "ext": 1
+   "ext": 1,
+   "cidade": "Bauru/SP"
   },
   "agu": {
    "n": "Santa Cecília – Agudos",
-   "ext": 1
+   "ext": 1,
+   "cidade": "Agudos/SP"
   },
   "mac": {
    "n": "Sta Rita – Macatuba",
-   "ext": 1
+   "ext": 1,
+   "cidade": "Macatuba/SP"
   },
   "ped": {
    "n": "Paróquia N.S. Aparecida – Pederneiras",
-   "ext": 1
+   "ext": 1,
+   "cidade": "Pederneiras/SP"
   }
  },
  "padres": {
