@@ -7,8 +7,8 @@
  * Cores dos padres: variáveis --p-<letra> geradas pelo app.js a partir de data/config.json.
  */
 :root{
-  /* declara suporte aos dois esquemas nos dois temas: impede o escurecimento forçado de navegadores (ex.: Samsung Internet) */
-  color-scheme:light dark;
+  /* "only light" impede o escurecimento forçado do navegador (ex.: Samsung Internet) sobre o tema claro */
+  color-scheme:only light;
   --bg:#f5f7fb; --fg:#16223b; --muted:#55627d; --surface:#ffffff; --surface2:#e6ecf8; --line:#dce2ee;
   --brand:#1e3a6e; --on-brand:#ffffff;
   --gold:#b8862b; --gold-text:#7e5a14; --gold-bg:#f7efdc;
