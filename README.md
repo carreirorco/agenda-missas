@@ -33,6 +33,10 @@ Cada comunidade em `data/config.json` pode ter, além de `n` (nome): `cidade` (e
 
 Em cada missa há um botão discreto com ícone de calendário. Ele abre um quadro com **Google Agenda**, **arquivo .ics** (Samsung, Apple, Outlook) e **Ver no mapa**. O evento leva celebrante, observações e o endereço da comunidade; missa dura 1h e os demais sacramentos 1h30; o `.ics` inclui lembrete 1 hora antes.
 
+## Tutorial do primeiro acesso
+
+Na primeira visita (controlada por `localStorage`, chave `missas-tour`) abre um tutorial em 7 passos que destaca o próximo evento, o mês, os filtros, o botão de agenda e as abas. Nos passos de toque, ele avança sozinho quando a pessoa toca no botão destacado. Dá para pular (ou Esc) e rever pelo link "Ver o tutorial de uso" no fim da página. Para ver como um visitante novo, apague essa chave no navegador.
+
 ## Arquivos
 
 - `index.html`, `style.css`, `app.js`: a página.

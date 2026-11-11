@@ -360,6 +360,88 @@ function baixarIcs(){
   toast("Arquivo de agenda baixado");
 }
 
+/* ---------- tutorial do primeiro acesso ---------- */
+var TOUR=null, TOUR_KEY="missas-tour";
+var PASSOS=[
+  {sel:"#view .next",t:"Próxima celebração",x:"Aqui você vê a próxima missa e quanto falta para ela. Logo abaixo estão o dia de hoje e os próximos dias."},
+  {sel:"#monthnav",t:"Mudar de mês",x:"Use as setas para ver a agenda de outros meses."},
+  {sel:"#ftoggle",t:"Filtros",x:"Toque em Filtros para abrir a busca.",click:true},
+  {sel:"#panel",t:"Encontre o que procura",x:"Busque por comunidade, horário ou tipo de celebração. Os botões com o nome dos padres, ao lado de Filtros, filtram com um toque.",depois:function(){S.open=false;$("ftoggle").setAttribute("aria-expanded","false");$("panel").classList.remove("open")}},
+  {sel:"#view .addbtn",t:"Adicionar à agenda",x:"Toque neste ícone para salvar a missa na agenda do seu celular, com o endereço da comunidade.",click:true,add:true},
+  {sel:"#sheet .box",t:"Escolha como salvar",x:"Google Agenda, arquivo .ics para os outros aplicativos de agenda, ou veja o local no mapa.",add:true,depois:function(){if(!$("sheet").hidden) fecharSheet()}},
+  {sel:".nav",t:"Outras telas",x:"Calendário do mês, Comunidades com seus horários e Padres com as escalas de cada um."}
+];
+function tourAlvo(st){
+  if(st.sel==="#view .addbtn") return document.querySelector("#view .item.next-it .addbtn")||document.querySelector("#view .addbtn");
+  return document.querySelector(st.sel);
+}
+function jaViuTour(){try{return !!localStorage.getItem(TOUR_KEY)}catch(e){return false}}
+function marcarTour(){try{localStorage.setItem(TOUR_KEY,"1")}catch(e){}}
+function iniciarTour(){
+  if(TOUR||!M) return;
+  S.v="agenda"; clearAll(); S.open=false; render(); window.scrollTo(0,0);
+  var temAdd=!!document.querySelector("#view .addbtn");
+  var passos=PASSOS.filter(function(p){return (!p.add||temAdd)&&(p.sel!=="#view .next"||document.querySelector("#view .next"))});
+  var box=document.createElement("div"); box.className="tour";
+  box.innerHTML='<div class="t-b"></div><div class="t-b"></div><div class="t-b"></div><div class="t-b"></div><div class="t-spot"></div>'+
+    '<div class="t-tip" role="dialog" aria-modal="true" aria-label="Tutorial" aria-live="polite"><div class="t-n"></div><h2></h2><p></p><div class="t-hint"></div>'+
+    '<div class="t-act"><button type="button" class="linkbtn t-skip">Pular tutorial</button><button type="button" class="iconbtn t-next"></button></div></div>';
+  document.body.appendChild(box);
+  TOUR={i:-1,passos:passos,box:box,alvo:null,raf:0,foco:document.activeElement};
+  box.querySelector(".t-skip").addEventListener("click",function(){fimTour()});
+  box.querySelector(".t-next").addEventListener("click",function(){avancarTour()});
+  window.addEventListener("scroll",agendarPos,true); window.addEventListener("resize",agendarPos);
+  avancarTour();
+}
+function agendarPos(){if(!TOUR||TOUR.raf) return;TOUR.raf=requestAnimationFrame(function(){TOUR.raf=0;posTour()})}
+function avancarTour(){
+  var T=TOUR; if(!T) return;
+  var ant=T.passos[T.i];
+  if(T.alvo&&T.cb){T.alvo.removeEventListener("click",T.cb,true);T.cb=null}
+  if(ant&&ant.depois) ant.depois();
+  T.i++;
+  if(T.i>=T.passos.length){fimTour();return}
+  var st=T.passos[T.i], el=tourAlvo(st);
+  if(!el){avancarTour();return}
+  T.alvo=el;
+  var tip=T.box.querySelector(".t-tip"), last=T.i===T.passos.length-1;
+  tip.querySelector(".t-n").textContent=(T.i+1)+" de "+T.passos.length;
+  tip.querySelector("h2").textContent=st.t;
+  tip.querySelector("p").textContent=st.x;
+  tip.querySelector(".t-hint").textContent=st.click?"Toque no botão destacado para continuar.":"";
+  var nx=tip.querySelector(".t-next"); nx.textContent=last?"Concluir":"Próximo"; nx.hidden=!!st.click;
+  T.box.querySelector(".t-spot").style.pointerEvents=st.click?"none":"auto";
+  el.scrollIntoView({block:"center",inline:"nearest"});
+  if(st.click){
+    T.cb=function(){setTimeout(avancarTour,120)};
+    el.addEventListener("click",T.cb,true);
+  }
+  posTour();
+  (st.click?tip.querySelector(".t-skip"):nx).focus({preventScroll:true});
+}
+function posTour(){
+  var T=TOUR; if(!T||!T.alvo) return;
+  var r=T.alvo.getBoundingClientRect(), p=6, vw=document.documentElement.clientWidth, vh=window.innerHeight;
+  var x=Math.max(0,r.left-p), y=Math.max(0,r.top-p), w=Math.min(vw-x,r.width+p*2), h=Math.min(vh-y,r.height+p*2);
+  var bl=T.box.querySelectorAll(".t-b"), rects=[[0,0,vw,y],[0,y+h,vw,vh-y-h],[0,y,x,h],[x+w,y,vw-x-w,h]];
+  rects.forEach(function(q,i){var s=bl[i].style;s.left=q[0]+"px";s.top=q[1]+"px";s.width=Math.max(0,q[2])+"px";s.height=Math.max(0,q[3])+"px"});
+  var sp=T.box.querySelector(".t-spot").style; sp.left=x+"px";sp.top=y+"px";sp.width=w+"px";sp.height=h+"px";
+  var tip=T.box.querySelector(".t-tip"), tw=Math.min(320,vw-24); tip.style.width=tw+"px";
+  tip.style.left=Math.max(12,Math.min(vw-tw-12,x+w/2-tw/2))+"px";
+  var th=tip.offsetHeight, abaixo=vh-(y+h)>=th+16;
+  tip.style.top=Math.max(8,abaixo?y+h+12:y-th-12)+"px";
+}
+function fimTour(){
+  var T=TOUR; if(!T) return;
+  if(T.alvo&&T.cb) T.alvo.removeEventListener("click",T.cb,true);
+  var st=T.passos[T.i]; if(st&&st.depois) st.depois();
+  window.removeEventListener("scroll",agendarPos,true); window.removeEventListener("resize",agendarPos);
+  T.box.remove(); TOUR=null; marcarTour();
+  if(!$("sheet").hidden) fecharSheet();
+  window.scrollTo(0,0);
+  if(T.foco&&document.body.contains(T.foco)) T.foco.focus({preventScroll:true});
+}
+
 /* ---------- render ---------- */
 function render(){
   if(!M) return;
@@ -408,6 +490,7 @@ document.addEventListener("click",function(e){
   if(ds.past!==undefined){S.past=ds.past==="1";render();return}
   if(ds.add){abrirSheet(M.ALL[+ds.add],b);return}
   if(b.id==="sheetIcs"){baixarIcs();return}
+  if(b.id==="tourBtn"){iniciarTour();return}
   if(b.dataset.close!==undefined){fecharSheet();return}
   if(ds.share){navigator.share({text:dayText(M.DAYS[+ds.share-1])}).catch(function(){});return}
   if(ds.copy){copyText(dayText(M.DAYS[+ds.copy-1]));return}
@@ -417,6 +500,7 @@ document.addEventListener("click",function(e){
   if(b.id==="ftoggle"){S.open=!S.open;b.setAttribute("aria-expanded",S.open);$("panel").classList.toggle("open",S.open)}
 });
 document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"&&TOUR){fimTour();return}
   if(e.key==="Escape"&&!$("sheet").hidden) fecharSheet();
   if(e.key==="Tab"&&!$("sheet").hidden){
     var f=[].slice.call($("sheet").querySelectorAll("a[href],button")).filter(function(x){return x.offsetParent!==null});
@@ -449,13 +533,14 @@ setInterval(function(){
   var n=new Date();
   if(n.getDate()!==lastDay){
     lastDay=n.getDate(); now=n;
+    if(TOUR) return;
     if(auto){abrir(hojeKey(),true);return}
     render();return;
   }
-  if(S.v==="agenda"){var y=window.scrollY;render();window.scrollTo(0,y)}
+  if(S.v==="agenda"&&!TOUR){var y=window.scrollY;render();window.scrollTo(0,y)}
 },30000);
 document.addEventListener("visibilitychange",function(){
-  if(document.hidden||!M) return;
+  if(document.hidden||!M||TOUR) return;
   var n=new Date();
   if(n.getDate()!==lastDay){lastDay=n.getDate();now=n;if(auto){abrir(hojeKey(),true);return}}
   render();
@@ -468,6 +553,8 @@ Promise.all([getJSON("data/config.json"),getJSON("data/meses.json")]).then(funct
   aplicarCores();
   var h=hashKey();
   auto=!h;
-  return abrir(h||hojeKey());
+  return abrir(h||hojeKey()).then(function(){
+    if(!jaViuTour()) setTimeout(iniciarTour,700);
+  });
 }).catch(erro);
 })();

@@ -219,3 +219,18 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.15}
 .opt{display:block;width:100%;text-align:center;text-decoration:none;color:var(--fg);background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-weight:600;font-size:14px}
 .opt:hover{border-color:var(--brand)}
 @media (min-width:700px){.sheet{align-items:center}.sheet .box{border-radius:18px}}
+
+/* tutorial */
+.tour{position:fixed;inset:0;z-index:70;pointer-events:none}
+.t-b{position:fixed;background:transparent;pointer-events:auto}
+.t-spot{position:fixed;border-radius:12px;box-shadow:0 0 0 9999px rgb(8 14 30 / .62),0 0 0 3px var(--gold);pointer-events:none}
+.t-tip{position:fixed;pointer-events:auto;background:var(--surface);color:var(--fg);border:1px solid var(--gold);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
+.t-n{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-text)}
+.t-tip h2{margin:2px 0 4px;font-size:22px}
+.t-tip p{margin:0;font-size:14px;line-height:1.4}
+.t-hint{margin-top:6px;font-size:13px;font-weight:600;color:var(--brand)}
+.t-hint:empty{display:none}
+.t-act{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px}
+.t-next{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
+.t-next[hidden]{display:none}
+#tourBtn{margin-top:4px}
