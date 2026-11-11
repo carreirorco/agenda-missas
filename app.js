@@ -384,8 +384,18 @@ function instalar(){
   $("inst").hidden=false; $("inst").querySelector(".opt").focus();
 }
 function fecharInst(){$("inst").hidden=true;if(instFoco&&document.body.contains(instFoco)) instFoco.focus()}
+var INST_KEY="missas-inst", instTimer=0;
+function instDispensado(){try{var t=+localStorage.getItem(INST_KEY);return t&&Date.now()-t<14*86400000}catch(e){return false}}
+function agendarInstBar(ms){
+  clearTimeout(instTimer);
+  instTimer=setTimeout(function(){
+    if(standalone()||instDispensado()||TOUR||!M) return;
+    $("instbar").hidden=false; document.body.classList.add("com-aviso");
+  },ms);
+}
+function fecharInstBar(){$("instbar").hidden=true;document.body.classList.remove("com-aviso");try{localStorage.setItem(INST_KEY,String(Date.now()))}catch(e){}}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();instEv=e});
-window.addEventListener("appinstalled",function(){instEv=null;$("instBtn").hidden=true;toast("App instalado")});
+window.addEventListener("appinstalled",function(){instEv=null;$("instBtn").hidden=true;$("instbar").hidden=true;document.body.classList.remove("com-aviso");toast("App instalado")});
 if(standalone()) $("instBtn").hidden=true;
 if("serviceWorker" in navigator&&(location.protocol==="https:"||location.hostname==="localhost"))
   window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(e){console.warn("Service worker:",e)})});
@@ -470,6 +480,7 @@ function fimTour(){
   if(!$("sheet").hidden) fecharSheet();
   window.scrollTo(0,0);
   if(T.foco&&document.body.contains(T.foco)) T.foco.focus({preventScroll:true});
+  agendarInstBar(1500);
 }
 
 /* ---------- render ---------- */
@@ -526,6 +537,8 @@ document.addEventListener("click",function(e){
   if(b.id==="sheetIcs"){baixarIcs();return}
   if(b.id==="tourBtn"){iniciarTour();return}
   if(b.id==="instBtn"){instalar();return}
+  if(b.id==="instGo"){$("instbar").hidden=true;document.body.classList.remove("com-aviso");instalar();return}
+  if(b.id==="instNo"){fecharInstBar();return}
   if(ds.share){navigator.share({text:dayText(M.DAYS[+ds.share-1])}).catch(function(){});return}
   if(ds.copy){copyText(dayText(M.DAYS[+ds.copy-1]));return}
   if(ds.loc){clearAll();S.loc=ds.loc;S.v="agenda";S.open=true;render();window.scrollTo({top:0,behavior:"smooth"});return}
@@ -589,7 +602,7 @@ Promise.all([getJSON("data/config.json"),getJSON("data/meses.json")]).then(funct
   var h=hashKey();
   auto=!h;
   return abrir(h||hojeKey()).then(function(){
-    if(!jaViuTour()) setTimeout(iniciarTour,700);
+    if(!jaViuTour()) setTimeout(iniciarTour,700); else agendarInstBar(4000);
   });
 }).catch(erro);
 })();

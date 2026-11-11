@@ -64,7 +64,7 @@
   <main id="view" role="tabpanel" aria-live="off"></main>
 
   <p class="note" id="note"></p>
-  <div class="foot"><button class="linkbtn" id="instBtn" type="button">Instalar como app</button><button class="linkbtn" id="tourBtn" type="button">Ver o tutorial de uso</button></div>
+  <div class="foot"><button class="iconbtn" id="instBtn" type="button">Instalar como app</button><button class="iconbtn" id="tourBtn" type="button">Ver o tutorial</button></div>
 </div>
 
 <nav class="nav" aria-label="Seções">
@@ -95,6 +95,12 @@
     <p class="where">Depois de instalado, o app abre em tela cheia, com ícone na tela inicial, e mostra a última agenda carregada mesmo sem internet.</p>
     <button class="opt" type="button" data-close>Entendi</button>
   </div>
+</div>
+<div class="instbar" id="instbar" role="region" aria-label="Instalar o app" hidden>
+  <img src="icons/icon-192.png" alt="" width="40" height="40">
+  <div class="txt"><b>Instale o app</b><span>Abre mais rápido e funciona sem internet.</span></div>
+  <button class="iconbtn go" id="instGo" type="button">Instalar</button>
+  <button class="x" id="instNo" type="button" aria-label="Agora não">×</button>
 </div>
 <div class="toast" id="toast" role="status"></div>
 <script src="app.js"></script>
