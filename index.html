@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Agenda de Missas · Paróquia São Judas Tadeu</title>
+<meta name="description" content="Agenda mensal de missas e sacramentos da Paróquia São Judas Tadeu.">
+<meta name="theme-color" content="#1e3a6e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%231e3a6e' stroke='%23b8862b' stroke-width='4'/%3E%3Cpath d='M32 14v36M21 25h22' stroke='%23fff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>
+/* aplica o tema antes de pintar (claro é o padrão) */
+try{document.documentElement.setAttribute("data-theme",localStorage.getItem("missas-tema")==="dark"?"dark":"light")}catch(e){}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<button class="themebtn" id="theme" type="button" aria-label="Alternar tema claro/escuro">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sun" d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/><circle class="sun" cx="12" cy="12" r="4"/><path class="moon" d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+</button>
+
+<div class="wrap" id="wrap">
+  <header class="top">
+    <span class="medallion" aria-hidden="true">SJ</span>
+    <div>
+      <div class="parish">Paróquia São Judas Tadeu</div>
+      <h1>Agenda de Missas</h1>
+    </div>
+  </header>
+
+  <div class="monthnav" id="monthnav">
+    <button class="iconbtn" id="mprev" type="button" aria-label="Mês anterior">‹</button>
+    <div class="mlabel" id="mlabel" aria-live="polite">Carregando…</div>
+    <button class="iconbtn" id="mnext" type="button" aria-label="Próximo mês">›</button>
+  </div>
+  <div class="cross-rule" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 3v18M6 9h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg></div>
+  <div class="aviso" id="aviso" role="status" hidden></div>
+
+  <div class="fbar" id="fbar">
+    <div class="scroll" id="fPad" aria-label="Filtrar por padre"></div>
+    <button class="iconbtn fbtn" id="ftoggle" type="button" aria-expanded="false" aria-controls="panel">Filtros<span class="n" id="fcount" hidden></span></button>
+  </div>
+  <div class="panel" id="panel">
+    <div><h3>Buscar</h3><input class="field" id="q" type="search" placeholder="Comunidade, padre ou observação" autocomplete="off"></div>
+    <div><h3>Comunidade</h3><select class="field" id="fLoc"></select></div>
+    <div><h3>Horário</h3><div class="chips" id="fPer"></div></div>
+    <div><h3>Celebração</h3><div class="chips" id="fTipo"></div></div>
+    <div><h3>Dias especiais</h3><div class="chips" id="fEsp"></div></div>
+    <button class="linkbtn" id="clear" type="button">Limpar filtros</button>
+  </div>
+
+  <main id="view"></main>
+
+  <p class="note" id="note"></p>
+</div>
+
+<nav class="nav" aria-label="Seções">
+  <div class="in" role="tablist" id="tabs">
+    <button class="tab" role="tab" data-v="agenda"><svg viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>Agenda</button>
+    <button class="tab" role="tab" data-v="cal"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Calendário</button>
+    <button class="tab" role="tab" data-v="loc"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Comunidades</button>
+    <button class="tab" role="tab" data-v="pad"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-4 3.6-6 7-6s6.2 2 7 6"/></svg>Padres</button>
+  </div>
+</nav>
+<div class="toast" id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>

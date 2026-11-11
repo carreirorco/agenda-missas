@@ -1,0 +1,721 @@
+{
+ "mes": "2026-11",
+ "destaques": [
+  [
+   1,
+   "Solenidade de Todos os Santos"
+  ],
+  [
+   2,
+   "Fiéis Defuntos"
+  ],
+  [
+   24,
+   "Tríduo de N. Sra. das Graças · 1º dia"
+  ],
+  [
+   25,
+   "Tríduo · 2º dia"
+  ],
+  [
+   26,
+   "Tríduo · 3º dia"
+  ],
+  [
+   27,
+   "Solenidade de N. Sra. das Graças"
+  ],
+  [
+   28,
+   "Cerco de Jericó · 1º dia"
+  ],
+  [
+   29,
+   "Cerco de Jericó · 2º dia"
+  ],
+  [
+   30,
+   "Cerco de Jericó · 3º dia"
+  ]
+ ],
+ "dias": {
+  "1": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H",
+    "Solenidade de Todos os Santos"
+   ],
+   [
+    "8h",
+    "cjt",
+    "m",
+    "T",
+    "Solenidade de Todos os Santos"
+   ],
+   [
+    "8h30",
+    "nsg",
+    "m",
+    "H",
+    "Solenidade de Todos os Santos"
+   ],
+   [
+    "10h",
+    "st",
+    "m",
+    "H",
+    "Solenidade de Todos os Santos"
+   ],
+   [
+    "10h",
+    "mre",
+    "m",
+    "T",
+    "Solenidade de Todos os Santos"
+   ],
+   [
+    "17h30",
+    "gua",
+    "m",
+    "T",
+    "Solenidade de Todos os Santos"
+   ],
+   [
+    "19h",
+    "nsa",
+    "m",
+    "H",
+    "Solenidade de Todos os Santos"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "T",
+    "Solenidade de Todos os Santos"
+   ]
+  ],
+  "2": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H",
+    "Comemoração dos Fiéis Defuntos"
+   ],
+   [
+    "10h",
+    "gua",
+    "m",
+    "H",
+    "Comemoração dos Fiéis Defuntos"
+   ],
+   [
+    "10h",
+    "nsa",
+    "m",
+    "T",
+    "Comemoração dos Fiéis Defuntos"
+   ]
+  ],
+  "3": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "T"
+   ]
+  ],
+  "4": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "T"
+   ],
+   [
+    "20h",
+    "nsa",
+    "m",
+    "H"
+   ]
+  ],
+  "5": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H",
+    "Missa Votiva de Santa Águeda"
+   ],
+   [
+    "10h",
+    "fna",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "st",
+    "m",
+    "T"
+   ]
+  ],
+  "6": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "15h",
+    "rec",
+    "m",
+    "T"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "H",
+    "Missa Votiva do Sagrado Coração de Jesus"
+   ]
+  ],
+  "7": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H",
+    "Missa Votiva de Nossa Senhora das Lágrimas"
+   ],
+   [
+    "17h30",
+    "pat",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "T"
+   ]
+  ],
+  "8": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "T"
+   ],
+   [
+    "8h30",
+    "nsg",
+    "m",
+    "T"
+   ],
+   [
+    "10h",
+    "st",
+    "m",
+    "T"
+   ],
+   [
+    "10h",
+    "mre",
+    "m",
+    "H"
+   ],
+   [
+    "17h30",
+    "gua",
+    "m",
+    "H"
+   ],
+   [
+    "19h",
+    "nsa",
+    "m",
+    "T"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "H"
+   ]
+  ],
+  "9": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "crm",
+    "m",
+    "H",
+    "Movimento Sacerdotal Mariano"
+   ]
+  ],
+  "10": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "T"
+   ]
+  ],
+  "11": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "T"
+   ],
+   [
+    "20h",
+    "nsa",
+    "m",
+    "H"
+   ]
+  ],
+  "12": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "st",
+    "m",
+    "H"
+   ]
+  ],
+  "13": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "15h",
+    "sj",
+    "m",
+    "T",
+    "Missa para os Enfermos"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "H",
+    "Missa Votiva do Preciosíssimo Sangue de Jesus"
+   ]
+  ],
+  "14": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "10h",
+    "nsg",
+    "b",
+    "H"
+   ],
+   [
+    "17h30",
+    "pat",
+    "m",
+    "H"
+   ],
+   [
+    "19h",
+    "psa",
+    "c",
+    "H",
+    "Carol e Lucas"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "T"
+   ]
+  ],
+  "15": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "T"
+   ],
+   [
+    "8h30",
+    "nsg",
+    "m",
+    "H"
+   ],
+   [
+    "10h",
+    "st",
+    "m",
+    "H",
+    "1ª Eucaristia"
+   ],
+   [
+    "10h",
+    "mre",
+    "m",
+    "T"
+   ],
+   [
+    "17h30",
+    "gua",
+    "m",
+    "T"
+   ],
+   [
+    "19h",
+    "nsa",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "T"
+   ]
+  ],
+  "16": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ]
+  ],
+  "17": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "cjb",
+    "m",
+    "H",
+    "Movimento Sacerdotal Mariano"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "T"
+   ]
+  ],
+  "18": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "H"
+   ]
+  ],
+  "19": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "st",
+    "m",
+    "H"
+   ]
+  ],
+  "20": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ]
+  ],
+  "21": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "17h30",
+    "pat",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "H",
+    "1ª Eucaristia"
+   ]
+  ],
+  "22": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "8h30",
+    "nsg",
+    "m",
+    "H"
+   ],
+   [
+    "10h",
+    "st",
+    "m",
+    "M"
+   ],
+   [
+    "10h",
+    "sj",
+    "m",
+    "H",
+    "1ª Eucaristia"
+   ],
+   [
+    "17h30",
+    "gua",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "H"
+   ]
+  ],
+  "23": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "bes",
+    "m",
+    "H"
+   ]
+  ],
+  "24": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "G",
+    "1º dia do Tríduo de N. Sra. das Graças"
+   ],
+   [
+    "19h30",
+    "psc",
+    "m",
+    "H"
+   ]
+  ],
+  "25": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "T",
+    "2º dia do Tríduo de N. Sra. das Graças"
+   ]
+  ],
+  "26": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "A",
+    "3º dia do Tríduo de N. Sra. das Graças"
+   ],
+   [
+    "20h",
+    "pjb",
+    "m",
+    "H"
+   ]
+  ],
+  "27": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "H",
+    "Solenidade de Nossa Senhora das Graças"
+   ]
+  ],
+  "28": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "17h30",
+    "pat",
+    "m",
+    "H"
+   ],
+   [
+    "18h",
+    "nsg",
+    "m",
+    "T",
+    "1º dia do Cerco de Jericó"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "H"
+   ]
+  ],
+  "29": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "T"
+   ],
+   [
+    "8h30",
+    "nsg",
+    "m",
+    "H"
+   ],
+   [
+    "10h",
+    "st",
+    "m",
+    "T"
+   ],
+   [
+    "17h30",
+    "gua",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "T",
+    "2º dia do Cerco de Jericó"
+   ]
+  ],
+  "30": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "agu",
+    "m",
+    "H",
+    "Movimento Sacerdotal Mariano"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "B",
+    "3º dia do Cerco de Jericó"
+   ]
+  ]
+ }
+}

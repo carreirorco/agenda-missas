@@ -1,0 +1,650 @@
+{
+ "mes": "2026-10",
+ "destaques": [
+  [
+   1,
+   "Solenidade de Santa Teresinha"
+  ],
+  [
+   12,
+   "Nossa Senhora Aparecida"
+  ],
+  [
+   25,
+   "Tríduo de São Judas Tadeu · 1º dia"
+  ],
+  [
+   26,
+   "Tríduo · 2º dia"
+  ],
+  [
+   27,
+   "Tríduo · 3º dia"
+  ],
+  [
+   28,
+   "Solenidade de São Judas Tadeu"
+  ]
+ ],
+ "dias": {
+  "1": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "st",
+    "m",
+    "H",
+    "Solenidade de Santa Teresinha"
+   ]
+  ],
+  "2": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "15h",
+    "rec",
+    "m",
+    "T"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "H",
+    "Missa Votiva do Sagrado Coração de Jesus"
+   ]
+  ],
+  "3": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H",
+    "Missa Votiva de Nossa Senhora das Lágrimas"
+   ],
+   [
+    "17h30",
+    "pat",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "H"
+   ]
+  ],
+  "4": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "8h30",
+    "nsg",
+    "m",
+    "T"
+   ],
+   [
+    "10h",
+    "st",
+    "m",
+    "H"
+   ],
+   [
+    "17h30",
+    "gua",
+    "m",
+    "T"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "T"
+   ]
+  ],
+  "5": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H",
+    "Missa Votiva de Santa Águeda"
+   ],
+   [
+    "19h30",
+    "bes",
+    "m",
+    "H"
+   ]
+  ],
+  "6": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "T"
+   ]
+  ],
+  "7": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "T"
+   ]
+  ],
+  "8": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "st",
+    "m",
+    "T"
+   ]
+  ],
+  "9": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "15h",
+    "sj",
+    "m",
+    "T",
+    "Missa para os Enfermos"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "H",
+    "Missa Votiva do Preciosíssimo Sangue de Jesus"
+   ]
+  ],
+  "10": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "10h",
+    "sj",
+    "b",
+    "T"
+   ],
+   [
+    "17h30",
+    "pat",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "T"
+   ]
+  ],
+  "11": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "8h30",
+    "nsg",
+    "m",
+    "T"
+   ],
+   [
+    "10h",
+    "st",
+    "m",
+    "T"
+   ],
+   [
+    "17h30",
+    "gua",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "T"
+   ]
+  ],
+  "12": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H",
+    "Solenidade de N. Sra. Aparecida"
+   ],
+   [
+    "9h",
+    "pat",
+    "r",
+    "T",
+    "Carreata de Nossa Senhora Aparecida"
+   ],
+   [
+    "10h",
+    "pat",
+    "m",
+    "T",
+    "Solenidade de N. Sra. Aparecida"
+   ],
+   [
+    "11h",
+    "nsg",
+    "c",
+    "H",
+    "Luciene e Jailson"
+   ],
+   [
+    "18h",
+    "gua",
+    "m",
+    "T",
+    "Solenidade de N. Sra. Aparecida"
+   ],
+   [
+    "19h30",
+    "sal",
+    "m",
+    "H",
+    "Solenidade de N. Sra. Aparecida com procissão"
+   ]
+  ],
+  "13": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "T"
+   ]
+  ],
+  "14": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "T"
+   ]
+  ],
+  "15": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "st",
+    "m",
+    "T"
+   ]
+  ],
+  "16": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ]
+  ],
+  "17": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "17h",
+    "nsg",
+    "c",
+    "H",
+    "Luciene e Carlos"
+   ],
+   [
+    "17h30",
+    "pat",
+    "m",
+    "M"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "H"
+   ]
+  ],
+  "18": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "T"
+   ],
+   [
+    "8h30",
+    "nsg",
+    "m",
+    "H"
+   ],
+   [
+    "10h",
+    "st",
+    "m",
+    "T"
+   ],
+   [
+    "17h30",
+    "gua",
+    "m",
+    "T"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "H"
+   ]
+  ],
+  "19": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "mac",
+    "m",
+    "H",
+    "Movimento Sacerdotal Mariano"
+   ]
+  ],
+  "20": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "ped",
+    "m",
+    "H",
+    "Movimento Sacerdotal Mariano"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "T"
+   ]
+  ],
+  "21": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsg",
+    "m",
+    "T"
+   ]
+  ],
+  "22": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "st",
+    "m",
+    "T"
+   ]
+  ],
+  "23": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ]
+  ],
+  "24": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "17h30",
+    "pat",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "H"
+   ]
+  ],
+  "25": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "8h30",
+    "nsg",
+    "m",
+    "T"
+   ],
+   [
+    "10h",
+    "st",
+    "m",
+    "H"
+   ],
+   [
+    "17h30",
+    "gua",
+    "m",
+    "T"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "T",
+    "1º dia do Tríduo de São Judas Tadeu"
+   ]
+  ],
+  "26": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "W",
+    "2º dia do Tríduo de São Judas Tadeu"
+   ],
+   [
+    "19h30",
+    "agu",
+    "m",
+    "H",
+    "Movimento Sacerdotal Mariano"
+   ]
+  ],
+  "27": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "X",
+    "3º dia do Tríduo de São Judas Tadeu"
+   ]
+  ],
+  "28": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H",
+    "Solenidade de São Judas Tadeu"
+   ],
+   [
+    "15h",
+    "sj",
+    "m",
+    "T",
+    "Solenidade de São Judas Tadeu · Missa dos Enfermos"
+   ],
+   [
+    "19h30",
+    "sj",
+    "m",
+    "H",
+    "Solenidade de São Judas Tadeu"
+   ]
+  ],
+  "29": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "19h30",
+    "st",
+    "m",
+    "T"
+   ]
+  ],
+  "30": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ]
+  ],
+  "31": [
+   [
+    "7h",
+    "sj",
+    "m",
+    "H"
+   ],
+   [
+    "17h30",
+    "pat",
+    "m",
+    "T"
+   ],
+   [
+    "18h",
+    "nsg",
+    "c",
+    "H",
+    "Grace e Eduardo"
+   ],
+   [
+    "19h30",
+    "nsps",
+    "m",
+    "T"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "locais": {
+  "sj": {
+   "n": "São Judas"
+  },
+  "st": {
+   "n": "Santa Terezinha"
+  },
+  "rec": {
+   "n": "Recanto dos Idosos"
+  },
+  "pat": {
+   "n": "Paturis"
+  },
+  "nsps": {
+   "n": "N. Sª do Perpétuo Socorro"
+  },
+  "nsg": {
+   "n": "N. Sª das Graças"
+  },
+  "gua": {
+   "n": "Guaianãs"
+  },
+  "bes": {
+   "n": "Bessi"
+  },
+  "sal": {
+   "n": "Saltinho"
+  },
+  "cjt": {
+   "n": "Capela Jesus Trabalhador"
+  },
+  "mre": {
+   "n": "Paróquia Mãe do Redentor",
+   "ext": 1
+  },
+  "nsa": {
+   "n": "Paróquia Nossa Senhora da Assunção",
+   "ext": 1
+  },
+  "fna": {
+   "n": "Famílias Novas – Agudos",
+   "ext": 1
+  },
+  "crm": {
+   "n": "Cristo Rei – Macatuba",
+   "ext": 1
+  },
+  "psa": {
+   "n": "Paróquia Santo Antônio – Agudos",
+   "ext": 1
+  },
+  "cjb": {
+   "n": "Capela São João Batista – Pederneiras",
+   "ext": 1
+  },
+  "psc": {
+   "n": "Paróquia Santa Clara de Assis",
+   "ext": 1
+  },
+  "pjb": {
+   "n": "Paróquia São João Batista – Bauru",
+   "ext": 1
+  },
+  "agu": {
+   "n": "Santa Cecília – Agudos",
+   "ext": 1
+  },
+  "mac": {
+   "n": "Sta Rita – Macatuba",
+   "ext": 1
+  },
+  "ped": {
+   "n": "Paróquia N.S. Aparecida – Pederneiras",
+   "ext": 1
+  }
+ },
+ "padres": {
+  "H": {
+   "n": "Pe. Heraldo",
+   "l": "#2F6FDE",
+   "d": "#6A9BFF"
+  },
+  "T": {
+   "n": "Pe. Thiago",
+   "l": "#2E9A5B",
+   "d": "#5CCB8A"
+  },
+  "M": {
+   "n": "Pe. Marcelo",
+   "l": "#7A2F62",
+   "d": "#C068A6"
+  },
+  "G": {
+   "n": "Pe. Gabriel Fantinati",
+   "l": "#C2571A",
+   "d": "#F0905A"
+  },
+  "A": {
+   "n": "Pe. Adriano",
+   "l": "#0F8A9D",
+   "d": "#4FC3D6"
+  },
+  "B": {
+   "n": "Pe. Breno",
+   "l": "#B83C8A",
+   "d": "#E58AD0"
+  },
+  "W": {
+   "n": "Pe. Wellington",
+   "l": "#D1458F",
+   "d": "#F074B4"
+  },
+  "X": {
+   "n": "A confirmar",
+   "l": "#7B8798",
+   "d": "#93A0B5"
+  }
+ },
+ "tipos": {
+  "m": "Missa",
+  "c": "Matrimônio",
+  "b": "Batizados",
+  "r": "Carreata"
+ }
+}
