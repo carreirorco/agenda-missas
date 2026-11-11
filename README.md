@@ -37,6 +37,10 @@ Em cada missa há um botão discreto com ícone de calendário. Ele abre um quad
 
 Na primeira visita (controlada por `localStorage`, chave `missas-tour`) abre um tutorial em 7 passos que destaca o próximo evento, o mês, os filtros, o botão de agenda e as abas. Nos passos de toque, ele avança sozinho quando a pessoa toca no botão destacado. Dá para pular (ou Esc) e rever pelo link "Ver o tutorial de uso" no fim da página. Para ver como um visitante novo, apague essa chave no navegador.
 
+## Usar como app (PWA)
+
+O site é instalável: `manifest.webmanifest` e `icons/` definem nome e ícone, e `sw.js` (service worker) guarda a página e os dados para abrir sem internet. A agenda é buscada na rede primeiro, então mês novo publicado aparece sozinho; sem internet, mostra o que foi carregado por último. No fim da página, o link "Instalar como app" abre o instalador (Android/Chrome) ou mostra o passo a passo (iPhone e Samsung Internet). Se mudar os arquivos do site de forma que quebre o cache, aumente `V` em `sw.js`. Os ícones foram gerados a partir do medalhão "SJ" (azul-marinho e dourado).
+
 ## Arquivos
 
 - `index.html`, `style.css`, `app.js`: a página.

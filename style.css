@@ -233,4 +233,6 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.15}
 .t-act{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px}
 .t-next{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
 .t-next[hidden]{display:none}
-#tourBtn{margin-top:4px}
+.foot{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:2px}
+.foot .linkbtn{font-size:13px;margin:0}
+.foot .linkbtn[hidden]{display:none}

@@ -360,6 +360,36 @@ function baixarIcs(){
   toast("Arquivo de agenda baixado");
 }
 
+/* ---------- instalar como app ---------- */
+var instEv=null, instFoco=null;
+function standalone(){return (window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone===true}
+function instrucoes(){
+  var ua=navigator.userAgent;
+  if(/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1))
+    return "No Safari, toque no botão Compartilhar (quadrado com uma seta para cima) e depois em “Adicionar à Tela de Início”.";
+  if(/SamsungBrowser/i.test(ua))
+    return "Toque no menu (três linhas), depois em “Adicionar página a” e escolha “Tela inicial”.";
+  if(/Android/i.test(ua))
+    return "Toque no menu (três pontinhos) e escolha “Instalar app” ou “Adicionar à tela inicial”.";
+  return "No menu do navegador, procure “Instalar app” ou “Adicionar à tela inicial”.";
+}
+function instalar(){
+  if(instEv){
+    var ev=instEv; instEv=null; ev.prompt();
+    ev.userChoice.then(function(r){if(r&&r.outcome==="accepted") toast("Instalando…")});
+    return;
+  }
+  instFoco=document.activeElement;
+  $("instTxt").textContent=instrucoes();
+  $("inst").hidden=false; $("inst").querySelector(".opt").focus();
+}
+function fecharInst(){$("inst").hidden=true;if(instFoco&&document.body.contains(instFoco)) instFoco.focus()}
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();instEv=e});
+window.addEventListener("appinstalled",function(){instEv=null;$("instBtn").hidden=true;toast("App instalado")});
+if(standalone()) $("instBtn").hidden=true;
+if("serviceWorker" in navigator&&(location.protocol==="https:"||location.hostname==="localhost"))
+  window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(e){console.warn("Service worker:",e)})});
+
 /* ---------- tutorial do primeiro acesso ---------- */
 var TOUR=null, TOUR_KEY="missas-tour";
 var PASSOS=[
@@ -476,6 +506,10 @@ function copyText(text){
 
 /* ---------- eventos ---------- */
 document.addEventListener("click",function(e){
+  if(e.target.closest("[data-close]")){
+    if(!$("inst").hidden) fecharInst(); else if(!$("sheet").hidden) fecharSheet();
+    return;
+  }
   var b=e.target.closest("button"); if(!b||!M) return;
   var ds=b.dataset;
   if(b.id==="mprev"){navegar(-1);return}
@@ -491,7 +525,7 @@ document.addEventListener("click",function(e){
   if(ds.add){abrirSheet(M.ALL[+ds.add],b);return}
   if(b.id==="sheetIcs"){baixarIcs();return}
   if(b.id==="tourBtn"){iniciarTour();return}
-  if(b.dataset.close!==undefined){fecharSheet();return}
+  if(b.id==="instBtn"){instalar();return}
   if(ds.share){navigator.share({text:dayText(M.DAYS[+ds.share-1])}).catch(function(){});return}
   if(ds.copy){copyText(dayText(M.DAYS[+ds.copy-1]));return}
   if(ds.loc){clearAll();S.loc=ds.loc;S.v="agenda";S.open=true;render();window.scrollTo({top:0,behavior:"smooth"});return}
@@ -501,6 +535,7 @@ document.addEventListener("click",function(e){
 });
 document.addEventListener("keydown",function(e){
   if(e.key==="Escape"&&TOUR){fimTour();return}
+  if(e.key==="Escape"&&!$("inst").hidden){fecharInst();return}
   if(e.key==="Escape"&&!$("sheet").hidden) fecharSheet();
   if(e.key==="Tab"&&!$("sheet").hidden){
     var f=[].slice.call($("sheet").querySelectorAll("a[href],button")).filter(function(x){return x.offsetParent!==null});
