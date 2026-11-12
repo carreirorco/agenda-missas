@@ -385,18 +385,23 @@ function instalar(){
 }
 function fecharInst(){$("inst").hidden=true;if(instFoco&&document.body.contains(instFoco)) instFoco.focus()}
 var INST_KEY="missas-inst", instTimer=0;
+var INSTALADO_KEY="missas-instalado";
+function jaInstalado(){try{return !!localStorage.getItem(INSTALADO_KEY)}catch(e){return false}}
+function marcarInstalado(){try{localStorage.setItem(INSTALADO_KEY,"1")}catch(e){}}
+function ehIOS(){var ua=navigator.userAgent;return /iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1)}
 function instDispensado(){try{var t=+localStorage.getItem(INST_KEY);return t&&Date.now()-t<14*86400000}catch(e){return false}}
 function agendarInstBar(ms){
   clearTimeout(instTimer);
   instTimer=setTimeout(function(){
-    if(standalone()||instDispensado()||TOUR||!M) return;
+    /* só avisa quando o navegador oferece instalar (evento) ou no iPhone, que não tem evento; app já instalado não dispara o evento */
+    if(standalone()||jaInstalado()||instDispensado()||TOUR||!M||!(instEv||ehIOS())) return;
     $("instbar").hidden=false; document.body.classList.add("com-aviso");
   },ms);
 }
 function fecharInstBar(){$("instbar").hidden=true;document.body.classList.remove("com-aviso");try{localStorage.setItem(INST_KEY,String(Date.now()))}catch(e){}}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();instEv=e});
-window.addEventListener("appinstalled",function(){instEv=null;$("instBtn").hidden=true;$("instbar").hidden=true;document.body.classList.remove("com-aviso");toast("App instalado")});
-if(standalone()) $("instBtn").hidden=true;
+window.addEventListener("appinstalled",function(){marcarInstalado();instEv=null;$("instBtn").hidden=true;$("instbar").hidden=true;document.body.classList.remove("com-aviso");toast("App instalado")});
+if(standalone()){marcarInstalado();$("instBtn").hidden=true}
 if("serviceWorker" in navigator&&(location.protocol==="https:"||location.hostname==="localhost"))
   window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(e){console.warn("Service worker:",e)})});
 
